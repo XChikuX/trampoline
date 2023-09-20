@@ -1,35 +1,31 @@
-[![Crate](https://img.shields.io/crates/v/check-if-email-exists.svg)](https://crates.io/crates/check-if-email-exists)
-[![Docs](https://docs.rs/check-if-email-exists/badge.svg)](https://docs.rs/check-if-email-exists)
-[![Docker](https://img.shields.io/docker/v/reacherhq/backend?color=0db7ed&label=docker&sort=date)](https://hub.docker.com/r/reacherhq/backend)
-[![Actions Status](https://github.com/reacherhq/check-if-email-exists/workflows/pr/badge.svg)](https://github.com/reacherhq/check-if-email-exists/actions)
-[![Github Sponsor](https://img.shields.io/static/v1?label=Sponsor&message=%E2%9D%A4&logo=GitHub&link=https://github.com/sponsors/amaurym)](https://github.com/sponsors/amaurym)
+[![Docker](https://img.shields.io/docker/v/xchikux/backend?color=0db7ed&label=docker&sort=date)](https://hub.docker.com/r/xchikux/trampoline)
 
 <br /><br />
 
-<p align="center"><img align="center" src="https://storage.googleapis.com/saasify-uploads-prod/696e287ad79f0e0352bc201b36d701849f7d55e7.svg" height="96" alt="reacher" /></p>
-<h1 align="center">check-if-email-exists</h1>
+<p align="center"><img align="center" src="https://psync.club/web/psync.webp" height="96" alt="Trampoline" /></p>
+<h1 align="center">Trampoline</h1>
 <h4 align="center">Check if an email address exists without sending any email.<br/>Comes with a <a href="./backend">⚙️ HTTP backend</a>.</h4>
 
 <br /><br /><br />
 
 ## 👉 Live Demo: https://reacher.email
 
-<img src="https://storage.googleapis.com/saasify-uploads-prod/696e287ad79f0e0352bc201b36d701849f7d55e7.svg" height="68" align="left" />
+<img src="https://psync.club/web/psync.webp" height="68" align="left" />
 
-This is open-source, but I also offer a **SaaS** solution that has `check-if-email-exists` packaged in a nice friendly web interface. If you are interested, find out more at [Reacher](https://reacher.email/?ref=github). If you have any questions, you can contact me at amaury@reacher.email.
+This is open-source, but I also offer a **SaaS** solution that has `Trampoline` packaged in a nice friendly web interface. If you are interested, find out more at [Trampoline](https://psync.club/?ref=github). If you have any questions, you can contact me at srikanth@psync.dev
 
 <br />
 
 ## Get Started
 
-3 non-SaaS ways to get started with `check-if-email-exists`.
+3 non-SaaS ways to get started with `Trampoline`.
 
 ### 1. ⚙️ HTTP backend using Docker (popular method 🥇) [[Full docs](./backend/README.md)]
 
 This option allows you to run a HTTP backend using Docker 🐳, on a cloud instance or your own server. Please note that outbound port 25 must be open.
 
 ```bash
-docker run -p 8080:8080 reacherhq/backend:latest
+docker run <coming_soon>
 ```
 
 Then send a `POST http://localhost:8080/v0/check_email` request with the following body:
@@ -56,19 +52,19 @@ Then send a `POST http://localhost:8080/v0/check_email` request with the followi
 Head to the [releases page](https://github.com/reacherhq/check-if-email-exists/releases) and download the binary for your platform.
 
 ```bash
-> $ check_if_email_exists --help
-check_if_email_exists 0.9.1
+> $ trampoline --help
+trampoline 0.9.2
 Check if an email address exists without sending an email.
 
 USAGE:
-    check_if_email_exists [FLAGS] [OPTIONS] [TO_EMAIL]
+    trampoline [FLAGS] [OPTIONS] [TO_EMAIL]
 ```
 
 Check out the [dedicated README.md](./cli/README.md) for all options and flags.
 
 ### 3. Programmatic Usage [[Full docs](https://docs.rs/check-if-email-exists)]
 
-In your own Rust project, you can add `check-if-email-exists` in your `Cargo.toml`:
+In your own Rust project, you can add `Trampoline` in your `Cargo.toml`:
 
 ```toml
 [dependencies]
@@ -78,7 +74,7 @@ check-if-email-exists = "0.9"
 And use it in your code as follows:
 
 ```rust
-use check_if_email_exists::{check_email, CheckEmailInput, CheckEmailInputProxy};
+use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
 
 async fn check() {
     // Let's say we want to test the deliverability of someone@gmail.com.
@@ -101,35 +97,35 @@ The output will be a JSON with the below format, the fields should be self-expla
 
 ```json
 {
-	"input": "someone@gmail.com",
-	"is_reachable": "invalid",
-	"misc": {
-		"is_disposable": false,
-		"is_role_account": false
-	},
-	"mx": {
-		"accepts_mail": true,
-		"records": [
-			"alt3.gmail-smtp-in.l.google.com.",
-			"gmail-smtp-in.l.google.com.",
-			"alt1.gmail-smtp-in.l.google.com.",
-			"alt4.gmail-smtp-in.l.google.com.",
-			"alt2.gmail-smtp-in.l.google.com."
-		]
-	},
-	"smtp": {
-		"can_connect_smtp": true,
-		"has_full_inbox": false,
-		"is_catch_all": false,
-		"is_deliverable": false,
-		"is_disabled": true
-	},
-	"syntax": {
-		"domain": "gmail.com",
-		"is_valid_syntax": true,
-		"username": "someone",
-		"suggestion": null
-	}
+  "input": "someone@gmail.com",
+  "is_reachable": "invalid",
+  "misc": {
+    "is_disposable": false,
+    "is_role_account": false
+  },
+  "mx": {
+    "accepts_mail": true,
+    "records": [
+      "alt3.gmail-smtp-in.l.google.com.",
+      "gmail-smtp-in.l.google.com.",
+      "alt1.gmail-smtp-in.l.google.com.",
+      "alt4.gmail-smtp-in.l.google.com.",
+      "alt2.gmail-smtp-in.l.google.com."
+    ]
+  },
+  "smtp": {
+    "can_connect_smtp": true,
+    "has_full_inbox": false,
+    "is_catch_all": false,
+    "is_deliverable": false,
+    "is_disabled": true
+  },
+  "syntax": {
+    "domain": "gmail.com",
+    "is_valid_syntax": true,
+    "username": "someone",
+    "suggestion": null
+  }
 }
 ```
 
@@ -159,17 +155,11 @@ Many online services (https://hunter.io, https://verify-email.org, https://email
 
 ## License
 
-`check-if-email-exists`'s source code is provided under a **dual license model**.
-
-### Commercial license
-
-If you want to use `check-if-email-exists` to develop commercial sites, tools, and applications, the Commercial License is the appropriate license. With this option, your source code is kept proprietary. Purchase a `check-if-email-exists` Commercial License at https://reacher.email/pricing.
+`Trampoline`'s source code is provided under a **dual license model**.
 
 ### Open source license
 
-If you are creating an open-source application under a license compatible with the GNU Affero GPL license v3, you may use `check-if-email-exists` under the terms of the [AGPL-3.0](./LICENSE.AGPL).
-
-[➡️ Read more](https://help.reacher.email/reacher-licenses) about Reacher's license.
+If you are creating an open-source application under a license compatible with the GNU Affero GPL license v3, you may use `Trampoline` under the terms of the [AGPL-3.0](./LICENSE.AGPL).
 
 ## ❓ FAQ
 
@@ -189,4 +179,4 @@ Feel free to check out Reacher's [FAQ](https://help.reacher.email/faq).
 
 ## 🔨 Build From Source
 
-Build the [CLI from source](./cli/README.md#build-from-source) or the [HTTP backend from source](./backend/README.md#build-from-source).
+Build the [CLI from source](./cli/README.md#build-from-source)
