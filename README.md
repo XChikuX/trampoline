@@ -13,13 +13,13 @@
 
 <img src="https://psync.club/web/psync.jpeg" height="68" align="left" />
 
-This is open-source, but I also offer a **SaaS** solution that has `Trampoline` packaged in a nice friendly web interface. If you are interested, find out more at [Trampoline](https://psync.club/?ref=github). If you have any questions, you can contact me at srikanth@psync.dev
+This is open-source, but I also offer a **SaaS** solution that has `trampoline` packaged in a nice friendly web interface. If you are interested, find out more at [Trampoline](https://psync.club/?ref=github). If you have any questions, you can contact me at srikanth@psync.dev
 
 <br />
 
 ## Get Started
 
-3 non-SaaS ways to get started with `Trampoline`.
+3 non-SaaS ways to get started with `trampoline`.
 
 ### 1. ⚙️ HTTP backend using Docker (popular method 🥇) [[Full docs](./backend/README.md)]
 
@@ -65,7 +65,7 @@ Check out the [dedicated README.md](./cli/README.md) for all options and flags.
 
 ### 3. Programmatic Usage [[Full docs](https://docs.rs/check-if-email-exists)]
 
-In your own Rust project, you can add `Trampoline` in your `Cargo.toml`:
+In your own Rust project, you can add `trampoline` in your `Cargo.toml`:
 
 ```toml
 [dependencies]
@@ -154,13 +154,9 @@ The output will be a JSON with the below format, the fields should be self-expla
 
 Many online services (https://hunter.io, https://verify-email.org, https://email-checker.net) offer this service for a paid fee. Here is an open-source alternative to those tools.
 
-## License
-
-`Trampoline`'s source code is provided under a **dual license model**.
-
 ### Open source license
 
-If you are creating an open-source application under a license compatible with the GNU Affero GPL license v3, you may use `Trampoline` under the terms of the [AGPL-3.0](./LICENSE.AGPL).
+If you are creating an open-source application under a license compatible with the GNU Affero GPL license v3, you may use `trampoline` under the terms of the [AGPL-3.0](./LICENSE.AGPL).
 
 ## ❓ FAQ
 
@@ -170,7 +166,7 @@ This means that the server does not allow real-time verification of an email rig
 
 #### The library hangs/takes a long time/doesn't show anything after 1 minute.
 
-Most ISPs block outgoing SMTP requests through port 25, to prevent spam. `check-if-email-exists` needs to have this port open to make a connection to the email's SMTP server, so won't work behind these ISPs, and will instead hang until it times out. There's unfortunately no easy workaround for this problem, see for example [this StackOverflow thread](https://stackoverflow.com/questions/18139102/how-to-get-around-an-isp-block-on-port-25-for-smtp). One solution is to rent a Linux cloud server with a static IP and no blocked ports, see for example our [Self-Host Guide](https://help.reacher.email/self-host-guide) for which cloud providers open port 25.
+Most ISPs block outgoing SMTP requests through port 25, to prevent spam. `trampoline` needs to have this port open to make a connection to the email's SMTP server, so won't work behind these ISPs, and will instead hang until it times out. There's unfortunately no easy workaround for this problem, see for example [this StackOverflow thread](https://stackoverflow.com/questions/18139102/how-to-get-around-an-isp-block-on-port-25-for-smtp). One solution is to rent a Linux cloud server with a static IP and no blocked ports, see for example our [Self-Host Guide](https://help.reacher.email/self-host-guide) for which cloud providers open port 25.
 
 To see in detail what the binary is doing behind the scenes, run it in verbose mode with `RUST_LOG=debug` to see the logs.
 
