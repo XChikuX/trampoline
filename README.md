@@ -4,7 +4,8 @@
 
 <p align="center"><img align="center" src="https://psync.club/web/psync.jpeg" height="96" alt="Trampoline" /></p>
 <h1 align="center">Trampoline</h1>
-<h3 align="center">Elevate yourself while landing your email.<br/>Comes with a <a href="./backend">⚙️ HTTP backend</a>.</h4>
+<h3 align="center">Elevate yourself while landing your email.<br/></h3>
+<h4>Comes with a <a href="./backend">⚙️ HTTP backend</a>.</h4>
 
 <br /><br /><br />
 
