@@ -2,7 +2,7 @@
 
 <br /><br />
 
-<p align="center"><img align="center" src="https://psync.club/web/psync.webp" height="96" alt="Trampoline" /></p>
+<p align="center"><img align="center" src="https://psync.club/web/psync.jpeg" height="96" alt="Trampoline" /></p>
 <h1 align="center">Trampoline</h1>
 <h4 align="center">Check if an email address exists without sending any email.<br/>Comes with a <a href="./backend">⚙️ HTTP backend</a>.</h4>
 
@@ -10,7 +10,7 @@
 
 ## 👉 Live Demo: https://reacher.email
 
-<img src="https://psync.club/web/psync.webp" height="68" align="left" />
+<img src="https://psync.club/web/psync.jpeg" height="68" align="left" />
 
 This is open-source, but I also offer a **SaaS** solution that has `Trampoline` packaged in a nice friendly web interface. If you are interested, find out more at [Trampoline](https://psync.club/?ref=github). If you have any questions, you can contact me at srikanth@psync.dev
 
