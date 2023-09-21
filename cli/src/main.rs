@@ -14,11 +14,11 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-use check_if_email_exists::{check_email, CheckEmailInput, CheckEmailInputProxy};
+use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
 use clap::Parser;
 use once_cell::sync::Lazy;
-use tide::prelude::*;
-use tide::Request;
+
+use crate::http;
 
 #[derive(Debug, Deserialize)]
 struct Proxy {
@@ -171,11 +171,10 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
 	};
 
 
-    // let mut app = tide::new();
-    // app.at("/").post(handle_check_email);
-    // app.listen("0.0.0.0:1235").await?;
-
-    // Ok(())
+    // Run the web server if --http flag is on.
+    if CONF.http {
+        http::run((CONF.http_host, CONF.http_port)).await?;
+    }
 
 	Ok(())
 }

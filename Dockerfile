@@ -4,7 +4,7 @@ FROM alpine:latest
 # Set working directory
 WORKDIR /app
 
-COPY check_if_email_exists .
+COPY trampoline .
 
 # Set the entrypoint
-ENTRYPOINT [ "./check_if_email_exists"]
+ENTRYPOINT [ "./trampoline"]

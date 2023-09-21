@@ -1,6 +1,6 @@
 <br /><br /><br />
 
-<h1 align="center">check-if-email-exists CLI</h1>
+<h1 align="center">trampoline CLI</h1>
 <h4 align="center">Email verification from your terminal.</h4>
 
 <br /><br /><br />
@@ -9,13 +9,13 @@
 
 ## Usage
 
-Head to the [releases page](https://github.com/reacherhq/check-if-email-exists/releases) and download the binary for your platform.
+Head to the [releases page](https://github.com/reacherhq/trampoline/releases) and download the binary for your platform.
 
 Then run:
 
 ```bash
 > $ check_if_email_exists --help
-check-if-email-exists-cli 0.9.1
+trampoline-cli 0.9.1
 Check if an email address exists without sending any email.
 
 USAGE:
@@ -80,8 +80,8 @@ First, [install Rust](https://www.rust-lang.org/tools/install); you'll need Rust
 
 ```bash
 # Download the code
-$ git clone https://github.com/reacherhq/check-if-email-exists
-$ cd check-if-email-exists
+$ git clone https://github.com/reacherhq/trampoline
+$ cd trampoline
 
 # Build in release mode
 $ cargo build --release
@@ -92,4 +92,4 @@ $ ./target/release/check_if_email_exists --help
 
 ## Legacy Bash Script
 
-The 1st version of this tool was a simple bash script that made a telnet call. If you would like to use that simpler version, have a look at the [`legacy`](https://github.com/reacherhq/check-if-email-exists/tree/legacy) branch. The reasons for porting the bash script to the current codebase are explained [in issue #4](https://github.com/reacherhq/check-if-email-exists/issues/4).
+The 1st version of this tool was a simple bash script that made a telnet call. If you would like to use that simpler version, have a look at the [`legacy`](https://github.com/reacherhq/trampoline/tree/legacy) branch. The reasons for porting the bash script to the current codebase are explained [in issue #4](https://github.com/reacherhq/trampoline/issues/4).
