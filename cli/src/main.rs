@@ -17,6 +17,7 @@
 use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
 use clap::Parser;
 use once_cell::sync::Lazy;
+use serde::Deserialize;
 
 use crate::http;
 
