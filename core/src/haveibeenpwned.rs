@@ -23,7 +23,7 @@ use pwned::api::PwnedBuilder;
 /// any breach.
 pub async fn check_haveibeenpwned(to_email: &str, api_key: Option<String>) -> Option<bool> {
 	let pwned = PwnedBuilder::default()
-		.user_agent("reacher")
+		.user_agent("trampoline")
 		.api_key(api_key)
 		.build()
 		.unwrap();

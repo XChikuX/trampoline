@@ -14,7 +14,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-//! `check-if-email-exists` lets you check if an email address exists without
+//! `trampoline` lets you check if an email address exists without
 //! sending any email.
 //!
 //! Under the hood, it connects to the email address's SMTP server, and,
@@ -34,7 +34,7 @@
 //! - Catch-all address. Is this email address a catch-all address?
 //!
 //! ```rust
-//! use check_if_email_exists::{check_email, CheckEmailInput, CheckEmailInputProxy};
+//! use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
 //!
 //! async fn check() {
 //!     // Let's say we want to test the deliverability of someone@gmail.com.

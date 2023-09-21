@@ -1,6 +1,6 @@
 [package]
 name = "trampoline"
-version = "0.9.1"
+version = "0.9.2"
 authors = ["Srikanth <srikanth@psync.dev>"]
 categories = ["email"]
 description = "Check if an email address exists without sending any email"

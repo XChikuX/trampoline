@@ -78,7 +78,7 @@ pub struct CheckEmailInput {
 	pub to_email: String,
 	/// Email to use in the `MAIL FROM:` SMTP command.
 	///
-	/// Defaults to "reacher.email@gmail.com", which is an unused addressed
+	/// Defaults to "vegetoyesh@gmail.com", which is an unused addressed
 	/// owned by Reacher.
 	pub from_email: String,
 	/// Name to use in the `EHLO:` SMTP command.
@@ -162,7 +162,7 @@ impl Default for CheckEmailInput {
 	fn default() -> Self {
 		CheckEmailInput {
 			to_email: "".into(),
-			from_email: "reacher.email@gmail.com".into(), // Unused, owned by Reacher
+			from_email: "vegetoyesh@gmail.com".into(), // Unused, owned by Reacher
 			hello_name: "gmail.com".into(),
 			#[cfg(feature = "headless")]
 			hotmail_use_headless: None,
