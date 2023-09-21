@@ -14,12 +14,12 @@ Head to the [releases page](https://github.com/reacherhq/trampoline/releases) an
 Then run:
 
 ```bash
-> $ check_if_email_exists --help
+> $ trampoline --help
 trampoline-cli 0.9.1
 Check if an email address exists without sending any email.
 
 USAGE:
-    check_if_email_exists [OPTIONS] <TO_EMAIL>
+    trampoline [OPTIONS] <TO_EMAIL>
 
 ARGS:
     <TO_EMAIL>    The email to check
@@ -71,7 +71,7 @@ OPTIONS:
 **💡 PRO TIP:** To show debug logs when running the binary, run:
 
 ```bash
-RUST_LOG=debug check_if_email_exists
+RUST_LOG=debug trampoline
 ```
 
 ## Build From Source
@@ -87,7 +87,7 @@ $ cd trampoline
 $ cargo build --release
 
 # Run the binary
-$ ./target/release/check_if_email_exists --help
+$ ./target/release/trampoline --help
 ```
 
 ## Legacy Bash Script
