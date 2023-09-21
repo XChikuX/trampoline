@@ -18,7 +18,6 @@ use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
 use clap::Parser;
 use once_cell::sync::Lazy;
 use serde::Deserialize;
-
 use crate::http;
 
 #[derive(Debug, Deserialize)]
@@ -107,30 +106,6 @@ pub struct Cli {
 
 /// Global config of this application.
 pub(crate) static CONF: Lazy<Cli> = Lazy::new(Cli::parse);
-
-
-async fn handle_check_email(mut req: Request<()>) -> tide::Result {
-    let params: RequestParams = req.body_json().await?;
-    
-    let mut input = CheckEmailInput::new(params.to_email.clone());
-    input
-        .set_from_email(params.from_email.unwrap_or("user@example.org".to_string()))
-        .set_hello_name(params.hello_name.unwrap_or("localhost".to_string()))
-        .set_smtp_port(params.smtp_port.unwrap_or(25));
-
-    if let Some(proxy) = params.proxy {
-        input.set_proxy(CheckEmailInputProxy {
-            host: proxy.host,
-            port: proxy.port,
-            username: proxy.username,
-            password: proxy.password,
-        });
-    }
-
-    let result = check_email(&input).await;
-
-    Ok(tide::Response::new(200).body_json(&result)?)
-}
 
 
 #[tokio::main]
