@@ -1,6 +1,5 @@
 use crate::CONF;
 use anyhow;
-use std::net::SocketAddr;
 use tide::http::mime::JSON;
 use tide::prelude::*;
 use tide::Request;
@@ -23,14 +22,14 @@ pub struct EmailCheckRequest {
     smtp_port: Option<u16>,
 }
 
-pub async fn handle_check_email(mut req: Request<()>) -> Result<tide::Response, tide::Error> {
+pub async fn handle_check_email(mut req: Request<()>) -> tide::Result {
     let body_str = req.body_string().await?;
     let params: EmailCheckRequest = serde_json::from_str(&body_str)?;
     let mut input = CheckEmailInput::new(params.to_email);
     input
-        .set_from_email(params.from_email.unwrap_or_else(|| CONF.from_email.clone()))
-        .set_hello_name(params.hello_name.unwrap_or_else(|| CONF.hello_name.clone()))
-        .set_smtp_port(params.smtp_port.unwrap_or(CONF.smtp_port));
+        .set_from_email(params.from_email.unwrap_or("hello@example.com".to_string()))
+        .set_hello_name(params.hello_name.unwrap_or("example.com".to_string()))
+        .set_smtp_port(params.smtp_port.unwrap_or(25));
 
     if let Some(proxy) = params.proxy {
         input.set_proxy(CheckEmailInputProxy {
@@ -63,7 +62,6 @@ pub async fn handle_check_email(mut req: Request<()>) -> Result<tide::Response, 
     }
 }
 
-#[shuttle_runtime::main]
 pub async fn run<A: Into<SocketAddr> + tide::listener::ToListener<()>>(
     addr: A,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
