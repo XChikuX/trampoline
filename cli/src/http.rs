@@ -1,6 +1,16 @@
+use crate::CONF;
+use std::net::SocketAddr;
 use tide::prelude::*;
 use tide::Request;
 use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
+
+#[derive(Debug, Deserialize)]
+pub struct Proxy {
+    host: String,
+    port: u16,
+    username: Option<String>,
+    password: Option<String>,
+}
 
 #[derive(Debug, Deserialize)]
 pub struct EmailCheckRequest {
@@ -9,14 +19,9 @@ pub struct EmailCheckRequest {
     hello_name: Option<String>,
     proxy: Option<Proxy>,
     smtp_port: Option<u16>,
-}
-
-#[derive(Debug, Deserialize)]
-pub struct Proxy {
-    host: String,
-    port: u16,
-    username: Option<String>,
-    password: Option<String>,
+    pub http: bool,
+    pub http_host: String,
+    pub http_port: u16,
 }
 
 pub async fn handle_check_email(mut req: Request<()>) -> tide::Result {
@@ -36,11 +41,11 @@ pub async fn handle_check_email(mut req: Request<()>) -> tide::Result {
         });
     }
 
-    let result = check_email(&input).await;
-    Ok(tide::Response::new(200).body_json(&result)?)
+    check_email(&input).await;
+    Ok(tide::Response::new(200))
 }
 
-pub async fn run<A: Into<SocketAddr>>(
+pub async fn run<A: Into<SocketAddr> + tide::listener::ToListener<()>>(
     addr: A,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let mut app = tide::new();
