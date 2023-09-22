@@ -64,11 +64,11 @@ pub async fn handle_check_email(mut req: Request<()>) -> Result<tide::Response, 
 }
 
 #[shuttle_runtime::main]
-pub async fn run<A: Into<SocketAddr> + tide::listener::ToListener<()>>(
-    addr: A,
-) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+async fn tide() -> shuttle_tide::ShuttleTide<()> {
     let mut app = tide::new();
-    app.at("/").post(handle_check_email);
-    app.listen(addr).await?;
-    Ok(())
+    app.with(tide::log::LogMiddleware::new());
+
+    app.at("/").get(|_| async { Ok("Hello, world!") });
+    app.at("/verify_email").post(|_| async handle_check_email);
+    Ok(app.into())
 }
