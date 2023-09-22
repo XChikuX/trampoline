@@ -2,7 +2,8 @@
 FROM scratch
 
 
-COPY ./target/release/trampoline* /usr/local/bin/
+COPY trampoline /usr/local/bin/
+
 
 # Set the entrypoint
 ENTRYPOINT [ "/usr/local/bin/trampoline", "--http-host", "0.0.0.0"]

@@ -66,6 +66,7 @@ pub async fn run<A: Into<SocketAddr> + tide::listener::ToListener<()>>(
     addr: A,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     let mut app = tide::new();
+    app.at("/").get(|_| async { Ok("Hello, world!") });
     app.at("/").post(handle_check_email);
     app.listen(addr).await?;
     Ok(())
