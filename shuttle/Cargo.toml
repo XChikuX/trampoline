@@ -3,9 +3,6 @@ name = "trampoline-shuttle"
 version = "0.1.0"
 edition = "2021"
 
-[[bin]]
-name = "trampoline"
-path = "src/main.rs"
 
 [dependencies]
 trampoline = { path = "../core", features = ["headless"] }
