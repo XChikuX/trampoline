@@ -1,6 +1,6 @@
 [workspace]
 members = [
-	"shuttle",
+	"cli",
 	"core",
 ]
 resolver = "2"

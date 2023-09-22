@@ -1,5 +1,5 @@
-use crate::CONF;
 use anyhow;
+use std::net::SocketAddr;
 use tide::http::mime::JSON;
 use tide::prelude::*;
 use tide::Request;

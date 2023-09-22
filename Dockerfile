@@ -1,10 +1,8 @@
 # Use a smaller base image for the build stage
-FROM alpine:latest
+FROM scratch
 
-# Set working directory
-WORKDIR /app
 
-COPY ./target/release/trampoline .
+COPY ./target/release/trampoline* /usr/local/bin/
 
 # Set the entrypoint
-ENTRYPOINT [ "./trampoline"]
+ENTRYPOINT [ "/usr/local/bin/trampoline", "--http-host", "0.0.0.0"]
