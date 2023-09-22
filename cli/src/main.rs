@@ -32,7 +32,7 @@ pub struct Cli {
     #[clap(long, env, default_value = "gmail.com")]
     pub hello_name: String,
 
-    #[clap(long, env, default_value = "127.0.0.1")]
+    #[clap(long, env, default_value = "")]
     pub http_host: String,
 
     #[clap(long, env, default_value = "8080")]
@@ -68,7 +68,7 @@ pub struct Cli {
 
     /// For Gmail email addresses, use Gmail's API instead of connecting
     /// directly to their SMTP servers.
-    #[clap(long, env, default_value = "false", parse(try_from_str))]
+    #[clap(long, env, default_value = "true", parse(try_from_str))]
     pub gmail_use_api: bool,
 
     /// For Hotmail addresses, use a headless browser to connect to the
@@ -78,7 +78,7 @@ pub struct Cli {
 
     /// For Microsoft 365 email addresses, use OneDrive's API instead of
     /// connecting directly to their SMTP servers.
-    #[clap(long, env, default_value = "false", parse(try_from_str))]
+    #[clap(long, env, default_value = "true", parse(try_from_str))]
     pub microsoft365_use_api: bool,
 
     /// Whether to check if a gravatar image is existing for the given email.
@@ -90,6 +90,7 @@ pub struct Cli {
     pub haveibeenpwned_api_key: Option<String>,
 
     /// The email to check.
+    #[clap(long, env, default_value = "")]
     pub to_email: String,
 }
 
@@ -123,7 +124,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         });
     }
 
-    let result = check_email(&input).await;
+    let result = async_std::task::block_on(check_email(&input));
 
     match serde_json::to_string_pretty(&result) {
         Ok(output) => {
@@ -135,10 +136,17 @@ async fn main() -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
     };
 
     // Run the web server if --http flag is on.
-    if !CONF.http_host.is_empty() {
-        let addr = format!("{}:{}", CONF.http_host, CONF.http_port);
-        http::run(addr.to_socket_addrs()?.next().unwrap()).await?;
-    }
+    if CONF.to_email.is_empty() {
+        if CONF.http_host.is_empty() {
+            println!("Please specify --http-host");
+        } else {
+            let addr = format!("{}:{}", CONF.http_host, CONF.http_port)
+                .to_socket_addrs()?
+                .next()
+                .unwrap();
+            http::run(addr).await?;
+        }
+    };
 
     Ok(())
 }

@@ -1,5 +1,7 @@
 use crate::CONF;
+use anyhow;
 use std::net::SocketAddr;
+use tide::http::mime::JSON;
 use tide::prelude::*;
 use tide::Request;
 use trampoline::{check_email, CheckEmailInput, CheckEmailInputProxy};
@@ -19,13 +21,11 @@ pub struct EmailCheckRequest {
     hello_name: Option<String>,
     proxy: Option<Proxy>,
     smtp_port: Option<u16>,
-    pub http: bool,
-    pub http_host: String,
-    pub http_port: u16,
 }
 
-pub async fn handle_check_email(mut req: Request<()>) -> tide::Result {
-    let params: EmailCheckRequest = req.body_json().await?;
+pub async fn handle_check_email(mut req: Request<()>) -> Result<tide::Response, tide::Error> {
+    let body_str = req.body_string().await?;
+    let params: EmailCheckRequest = serde_json::from_str(&body_str)?;
     let mut input = CheckEmailInput::new(params.to_email);
     input
         .set_from_email(params.from_email.unwrap_or_else(|| CONF.from_email.clone()))
@@ -40,9 +40,27 @@ pub async fn handle_check_email(mut req: Request<()>) -> tide::Result {
             password: proxy.password,
         });
     }
+    // Create a Tokio runtime
+    let tokio_runtime = tokio::runtime::Runtime::new().unwrap();
 
-    check_email(&input).await;
-    Ok(tide::Response::new(200))
+    let result = tokio_runtime.block_on(check_email(&input));
+    println!("result: {:?}", result);
+    match serde_json::to_string_pretty(&result) {
+        Ok(output) => {
+            // Using JSON as the output response type and setting HTTP status as 200
+            Ok(tide::Response::builder(200)
+                .body(tide::Body::from_string(output))
+                .content_type(JSON)
+                .build())
+        }
+        Err(_) => {
+            // Generating a 500 error if serializing JSON fails
+            Err(tide::Error::new(
+                500,
+                anyhow::anyhow!("Failed to serialize JSON"),
+            ))
+        }
+    }
 }
 
 pub async fn run<A: Into<SocketAddr> + tide::listener::ToListener<()>>(
