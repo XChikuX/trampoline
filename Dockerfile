@@ -4,7 +4,7 @@ FROM alpine:latest
 # Set working directory
 WORKDIR /app
 
-COPY trampoline .
+COPY ./target/release/trampoline .
 
 # Set the entrypoint
 ENTRYPOINT [ "./trampoline"]
