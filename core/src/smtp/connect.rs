@@ -76,7 +76,7 @@ async fn connect_to_host(
         security,
     )
     .hello_name(ClientId::Domain(input.hello_name.clone()))
-    .timeout(Some(Duration::new(30, 0))); // Set timeout to 30s
+    .timeout(Some(Duration::new(10, 0))); // Set timeout to 10s
 
     if let Some(proxy) = &input.proxy {
         let socks5_config = match (&proxy.username, &proxy.password) {
