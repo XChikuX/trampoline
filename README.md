@@ -177,3 +177,7 @@ Feel free to check out Reacher's [FAQ](https://help.reacher.email/faq).
 ## 🔨 Build From Source
 
 Build the [CLI from source](./cli/README.md#build-from-source)
+
+## Known Issues
+
+Uses login.yahoo.com for aol addresses. [AOL Bug](https://github.com/reacherhq/check-if-email-exists/issues/1470)
